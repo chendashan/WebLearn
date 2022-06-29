@@ -4,6 +4,10 @@ body {
     background-color: lightgrey;
 }
 
+a {
+    text-decoration: none;
+}
+
 div {
     position: relative;
     float: left;

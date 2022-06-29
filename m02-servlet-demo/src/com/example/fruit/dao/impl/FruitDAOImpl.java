@@ -23,4 +23,9 @@ public class FruitDAOImpl extends BaseDAO<Fruit> implements FruitDAO {
         String sql = "update t_fruit set fname = ? , price = ? , fcount = ? , remark = ? where fid = ?";
         super.executeUpdate(sql, fruit.getFname(), fruit.getPrice(), fruit.getFcount(), fruit.getRemark(), fruit.getFid());
     }
+
+    @Override
+    public void delFruit(Integer fid) {
+        super.executeUpdate("delete from t_fruit where fid = ? ", fid);
+    }
 }

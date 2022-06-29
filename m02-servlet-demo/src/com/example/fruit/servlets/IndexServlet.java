@@ -1,4 +1,4 @@
-package com.example.servlets;
+package com.example.fruit.servlets;
 
 import com.example.fruit.dao.FruitDAO;
 import com.example.fruit.dao.impl.FruitDAOImpl;
