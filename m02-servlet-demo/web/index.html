@@ -15,6 +15,7 @@
                 <th class="w20">名称3</th>
                 <th class="w20">单价</th>
                 <th class="w20">库存</th>
+                <th class="w20">说明</th>
                 <th class="w20">操作</th>
             </tr>
             <tr th:if="${#lists.isEmpty(session.fruit_list)}">
@@ -25,6 +26,7 @@
                 <td><a th:text="${fruit.fname}" th:href="@{/edit.do( fid=${fruit.fid} )}"> 苹果 </a></td>
                 <td th:text="${fruit.price}">5</td>
                 <td th:text="${fruit.fcount}">21</td>
+                <td th:text="${fruit.remark}">又大又甜</td>
                 <td><img src="imgs/delete.png" class="img_delete"/></td>
             </tr>
 

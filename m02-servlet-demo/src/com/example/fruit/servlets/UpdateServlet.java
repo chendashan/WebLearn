@@ -33,8 +33,8 @@ public class UpdateServlet extends ViewBaseServlet {
         fruitDAO.updateFruit(new Fruit(fid, fname, price, count, remark));
 
         //资源跳转
-        //super.processTemplate("fruit", request, response);
-        //相当于request.getRequestDispatcher("fruit.html").forward(request, response);
+        //super.processTemplate("index", request, response);
+        //相当于request.getRequestDispatcher("index.html").forward(request, response);
 
         //此处需要重定向，目的是重新给IndexServlet发请求，重新获取数据
         response.sendRedirect("index");
