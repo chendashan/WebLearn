@@ -12,4 +12,15 @@ public class FruitDAOImpl extends BaseDAO<Fruit> implements FruitDAO {
     public List<Fruit> getFruitList() {
         return super.executeQuery("select * from t_fruit");
     }
+
+    @Override
+    public Fruit getFruitByFid(Integer fid) {
+        return super.load("select * from t_fruit where fid = ?", fid);
+    }
+
+    @Override
+    public void updateFruit(Fruit fruit) {
+        String sql = "update t_fruit set fname = ? , price = ? , fcount = ? , remark = ? where fid = ?";
+        super.executeUpdate(sql, fruit.getFname(), fruit.getPrice(), fruit.getFcount(), fruit.getRemark(), fruit.getFid());
+    }
 }

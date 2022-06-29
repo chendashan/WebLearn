@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="css/demo03.css">
-    <script type="text/javascript" src="js/demo03.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/fruit.css">
 </head>
 
 <body>
@@ -13,25 +12,20 @@
         <p class="center f30">Terminator 2: Judgment Day</p>
         <table id="tal_fruit">
             <tr>
-                <th class="w20">名称</th>
+                <th class="w20">名称3</th>
                 <th class="w20">单价</th>
                 <th class="w20">库存</th>
-                <th class="w20">小计</th>
                 <th class="w20">操作</th>
             </tr>
             <tr th:if="${#lists.isEmpty(session.fruit_list)}">
                 <td colspan="5">对不起，库存为空</td>
             </tr>
             <tr th:unless="${#lists.isEmpty(session.fruit_list)}" th:each="fruit : ${session.fruit_list}">
-                <td th:text="${fruit.fname}">苹果</td>
+                <!-- <td> <a th:text="${fruit.fname}" th:href="@{'/edit.do?fid=' + ${fruit.fid}}"> 苹果 </a> </td> -->
+                <td><a th:text="${fruit.fname}" th:href="@{/edit.do( fid=${fruit.fid} )}"> 苹果 </a></td>
                 <td th:text="${fruit.price}">5</td>
                 <td th:text="${fruit.fcount}">21</td>
-                <td>99</td>
                 <td><img src="imgs/delete.png" class="img_delete"/></td>
-            </tr>
-            <tr>
-                <td>总计</td>
-                <td colspan="4">196</td>
             </tr>
 
         </table>

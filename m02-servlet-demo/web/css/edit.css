@@ -10,7 +10,7 @@ div {
 }
 
 input {
-    font-size: 22px;
+    font-size: 16px;
 }
 
 #div_container {
@@ -35,12 +35,12 @@ input {
 }
 
 #tal_fruit, #tal_fruit tr, #tal_fruit th, #tal_fruit td {
-    border: 2px solid grey;
+    border: 1px solid grey;
     border-collapse: collapse;
     text-align: center;
     font-family: "黑体";
     color: threeddarkshadow;
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .w20 {
