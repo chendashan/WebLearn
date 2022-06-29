@@ -159,7 +159,7 @@ public abstract class BaseDAO<T> {
     }
 
     //执行复杂查询，返回统计结果
-    private Object[] executeComplexQuery(String sql, Object... params) {
+    protected Object[] executeComplexQuery(String sql, Object... params) {
         try {
             conn = getConn();
             psmt = conn.prepareStatement(sql);
