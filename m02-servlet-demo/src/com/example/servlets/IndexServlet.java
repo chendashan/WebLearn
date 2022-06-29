@@ -27,5 +27,6 @@ public class IndexServlet extends ViewBaseServlet {
         session.setAttribute("fruit_list", list);
 
         super.processTemplate("fruit", req, resp);
+
     }
 }
