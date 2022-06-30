@@ -15,18 +15,10 @@ import java.util.List;
 public class FruitController {
     private FruitDAO fruitDAO = new FruitDAOImpl();
 
-    private String update(HttpServletRequest request) throws ServletException {
-
-        //2. 获取参数
-        String fidStr = request.getParameter("fid");
-        int fid = Integer.parseInt(fidStr);
-        String fname = request.getParameter("fname");
-        int price = Integer.parseInt(request.getParameter("price"));
-        int count = Integer.parseInt(request.getParameter("fcount"));
-        String remark = request.getParameter("remark");
+    private String update(Integer fid, String fname, Integer price, Integer fcount, String remark) {
 
         //执行更新
-        fruitDAO.updateFruit(new Fruit(fid, fname, price, count, remark));
+        fruitDAO.updateFruit(new Fruit(fid, fname, price, fcount, remark));
 
         //资源跳转
         //super.processTemplate("index", request, response);
@@ -37,23 +29,18 @@ public class FruitController {
         return "redirect:fruit.do";
     }
 
-    private String edit(HttpServletRequest req) throws IOException {
-        String fidStr = req.getParameter("fid");
-        if (StringUtil.isNotEmpty(fidStr)) {
-            int fid = Integer.parseInt(fidStr);
+    private String edit(Integer fid, HttpServletRequest request) {
+        if (fid != null) {
             Fruit fruit = fruitDAO.getFruitByFid(fid);
-            req.setAttribute("fruit", fruit);
+            request.setAttribute("fruit", fruit);
             //super.processTemplate("edit", req, resp);
             return "edit";
         }
         return "error";
     }
 
-    private String del(HttpServletRequest request) throws ServletException, IOException {
-        String fidStr = request.getParameter("fid");
-        if (StringUtil.isNotEmpty(fidStr)) {
-            int fid = Integer.parseInt(fidStr);
-
+    private String del(Integer fid) {
+        if (fid != null) {
             fruitDAO.delFruit(fid);
 
             //response.sendRedirect("fruit.do");
@@ -62,35 +49,27 @@ public class FruitController {
         return "error";
     }
 
-    private String add(HttpServletRequest request) throws IOException {
-        request.setCharacterEncoding("utf-8");
+    private String add(String fname, Integer price, Integer fcount, String remark) {
 
-        String name = request.getParameter("fname");
-        int price = Integer.parseInt(request.getParameter("price"));
-        int count = Integer.parseInt(request.getParameter("fcount"));
-        String remark = request.getParameter("remark");
-
-        Fruit fruit = new Fruit(0, name, price, count, remark);
+        Fruit fruit = new Fruit(0, fname, price, fcount, remark);
         fruitDAO.addFruit(fruit);
 
         return "redirect:fruit.do";
     }
 
-    private String index(HttpServletRequest req) throws ServletException, IOException {
+    private String index(String oper, String keyword, Integer page, HttpServletRequest request) {
 
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         //设置当前页，默认值1
-        Integer page = 1;
-
-        String keyword = null;
+        if (page == null) {
+            page = 1;
+        }
 
         //如果oper!=null 说明通过表单的查询按钮过来的
         //如果 oper 是空的，说明不是通过表单的查询按钮点击过来的
-        String oper = req.getParameter("oper");
         if (StringUtil.isNotEmpty(oper) && oper.equals("search")) {
             //说明是点击表单查询发送过来的请求
             page = 1;
-            keyword = req.getParameter("keyword");
             //防止查询时拼接成%null%，期望的是%%
             if (StringUtil.isEmpty(keyword)) {
                 keyword = "";
@@ -99,10 +78,7 @@ public class FruitController {
             session.setAttribute("keyword", keyword);
         } else {
             //非点击查询按钮的请求
-            String pageStr = req.getParameter("page");
-            if (StringUtil.isNotEmpty(pageStr)) {
-                page = Integer.parseInt(pageStr);
-            }
+
             //查询关键字根据session中的keyword
             Object keywordObj = session.getAttribute("keyword");
             if (keywordObj != null) {
