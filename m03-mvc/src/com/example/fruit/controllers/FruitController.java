@@ -49,7 +49,7 @@ public class FruitController {
         return "error";
     }
 
-    private String delete(HttpServletRequest request) throws ServletException, IOException {
+    private String del(HttpServletRequest request) throws ServletException, IOException {
         String fidStr = request.getParameter("fid");
         if (StringUtil.isNotEmpty(fidStr)) {
             int fid = Integer.parseInt(fidStr);
@@ -57,7 +57,7 @@ public class FruitController {
             fruitDAO.delFruit(fid);
 
             //response.sendRedirect("fruit.do");
-            return "redirect.fruit.do";
+            return "redirect:fruit.do";
         }
         return "error";
     }
@@ -73,7 +73,7 @@ public class FruitController {
         Fruit fruit = new Fruit(0, name, price, count, remark);
         fruitDAO.addFruit(fruit);
 
-        return "redirect.fruit.do";
+        return "redirect:fruit.do";
     }
 
     private String index(HttpServletRequest req) throws ServletException, IOException {
