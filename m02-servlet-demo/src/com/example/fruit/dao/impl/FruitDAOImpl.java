@@ -9,9 +9,10 @@ import java.util.List;
 public class FruitDAOImpl extends BaseDAO<Fruit> implements FruitDAO {
 
     @Override
-    public List<Fruit> getFruitPageList(Integer page) {
+    public List<Fruit> getFruitPageList(String keyword, Integer page) {
         //SELECT * FROM t_fruit LIMIT (page - 1) * 5 , 5 ;
-        return super.executeQuery("select * from t_fruit limit ? , 5", (page - 1) * 5);
+        return super.executeQuery("select * from t_fruit where fname like ? or remark like ? limit ? , 5",
+                "%" + keyword + "%", "%" + keyword + "%", (page - 1) * 5);
     }
 
     @Override
@@ -41,7 +42,8 @@ public class FruitDAOImpl extends BaseDAO<Fruit> implements FruitDAO {
     }
 
     @Override
-    public int getFruitCount() {
-        return ((Long) super.executeComplexQuery("select count(*) from t_fruit")[0]).intValue();
+    public int getFruitCount(String keyword) {
+        return ((Long) super.executeComplexQuery("select count(*) from t_fruit where fname like ? or remark like ?",
+                "%" + keyword + "%", "%" + keyword + "%")[0]).intValue();
     }
 }
