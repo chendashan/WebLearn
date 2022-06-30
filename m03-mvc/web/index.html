@@ -12,7 +12,7 @@
     <div id="div_fruit_list">
         <p class="center f30">Terminator 2: Judgment Day (mvc)</p>
         <div style="border: 0px solid red; width: 60%; margin-left: 20%; text-align: right;">
-            <form th:action="@{/index}" method="post" style="float: left; border: 0px solid red;">
+            <form th:action="@{/fruit.do}" method="post" style="float: left; border: 0px solid red;">
                 <input type="hidden" name="oper" value="search">
                 查询关键字：<input type="text" name="keyword" th:value="${session.keyword}"/>
                 <input type="submit" value="查询" class="btn"/>
@@ -32,7 +32,7 @@
             </tr>
             <tr th:unless="${#lists.isEmpty(session.fruit_list)}" th:each="fruit : ${session.fruit_list}">
                 <!-- <td> <a th:text="${fruit.fname}" th:href="@{'/edit.do?fid=' + ${fruit.fid}}"> 苹果 </a> </td> -->
-                <td><a th:text="${fruit.fname}" th:href="@{/edit.do( fid=${fruit.fid} )}"> 苹果 </a></td>
+                <td><a th:text="${fruit.fname}" th:href="@{/fruit.do( fid=${fruit.fid}, operate='edit' )}"> 苹果 </a></td>
                 <td th:text="${fruit.price}">5</td>
                 <td th:text="${fruit.fcount}">21</td>
                 <td th:text="${fruit.remark}">又大又甜</td>
