@@ -1,57 +1,21 @@
-package com.example.fruit.servlets;
+package com.example.fruit.controllers;
 
 import com.example.fruit.dao.FruitDAO;
 import com.example.fruit.dao.impl.FruitDAOImpl;
 import com.example.fruit.pojo.Fruit;
-import com.example.myssm.myspringmvc.ViewBaseServlet;
 import com.example.myssm.util.StringUtil;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/fruit.do")
-public class FruitServlet extends ViewBaseServlet {
+
+public class FruitController {
     private FruitDAO fruitDAO = new FruitDAOImpl();
 
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-
-        String operate = request.getParameter("operate");
-        if (StringUtil.isEmpty(operate)) {
-            operate = "index";
-        }
-
-        switch (operate) {
-            case "index":
-                index(request, response);
-                break;
-            case "add":
-                add(request, response);
-                break;
-            case "del":
-                delete(request, response);
-                break;
-            case "edit":
-                edit(request, response);
-                break;
-            case "update":
-                update(request, response);
-                break;
-
-            default:
-                throw new RuntimeException("operate值非法！");
-        }
-    }
-
-    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1. 设置编码
-        request.setCharacterEncoding("utf-8");
+    private String update(HttpServletRequest request) throws ServletException {
 
         //2. 获取参数
         String fidStr = request.getParameter("fid");
@@ -69,31 +33,36 @@ public class FruitServlet extends ViewBaseServlet {
         //相当于request.getRequestDispatcher("index.html").forward(request, response);
 
         //此处需要重定向，目的是重新给IndexServlet发请求，重新获取数据
-        response.sendRedirect("fruit.do");
+        //response.sendRedirect("fruit.do");
+        return "redirect:fruit.do";
     }
 
-    private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private String edit(HttpServletRequest req) throws IOException {
         String fidStr = req.getParameter("fid");
         if (StringUtil.isNotEmpty(fidStr)) {
             int fid = Integer.parseInt(fidStr);
             Fruit fruit = fruitDAO.getFruitByFid(fid);
             req.setAttribute("fruit", fruit);
-            super.processTemplate("edit", req, resp);
+            //super.processTemplate("edit", req, resp);
+            return "edit";
         }
+        return "error";
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private String delete(HttpServletRequest request) throws ServletException, IOException {
         String fidStr = request.getParameter("fid");
         if (StringUtil.isNotEmpty(fidStr)) {
             int fid = Integer.parseInt(fidStr);
 
             fruitDAO.delFruit(fid);
 
-            response.sendRedirect("fruit.do");
+            //response.sendRedirect("fruit.do");
+            return "redirect.fruit.do";
         }
+        return "error";
     }
 
-    private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private String add(HttpServletRequest request) throws IOException {
         request.setCharacterEncoding("utf-8");
 
         String name = request.getParameter("fname");
@@ -104,10 +73,10 @@ public class FruitServlet extends ViewBaseServlet {
         Fruit fruit = new Fruit(0, name, price, count, remark);
         fruitDAO.addFruit(fruit);
 
-        response.sendRedirect("fruit.do");
+        return "redirect.fruit.do";
     }
 
-    private void index(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private String index(HttpServletRequest req) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
         //设置当前页，默认值1
@@ -156,6 +125,7 @@ public class FruitServlet extends ViewBaseServlet {
 
         session.setAttribute("pageCount", pageCount);
 
-        super.processTemplate("index", req, resp);
+        //super.processTemplate("index", req, resp);
+        return "index";
     }
 }
