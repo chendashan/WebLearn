@@ -1,24 +1,22 @@
 package com.example.fruit.controllers;
 
-import com.example.fruit.dao.FruitDAO;
-import com.example.fruit.dao.impl.FruitDAOImpl;
 import com.example.fruit.pojo.Fruit;
+import com.example.fruit.service.FruitService;
 import com.example.myssm.util.StringUtil;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 
 public class FruitController {
-    private FruitDAO fruitDAO = new FruitDAOImpl();
+
+    private FruitService fruitService = null;
 
     private String update(Integer fid, String fname, Integer price, Integer fcount, String remark) {
 
         //执行更新
-        fruitDAO.updateFruit(new Fruit(fid, fname, price, fcount, remark));
+        fruitService.updateFruit(new Fruit(fid, fname, price, fcount, remark));
 
         //资源跳转
         //super.processTemplate("index", request, response);
@@ -31,7 +29,7 @@ public class FruitController {
 
     private String edit(Integer fid, HttpServletRequest request) {
         if (fid != null) {
-            Fruit fruit = fruitDAO.getFruitByFid(fid);
+            Fruit fruit = fruitService.getFruitById(fid);
             request.setAttribute("fruit", fruit);
             //super.processTemplate("edit", req, resp);
             return "edit";
@@ -41,7 +39,7 @@ public class FruitController {
 
     private String del(Integer fid) {
         if (fid != null) {
-            fruitDAO.delFruit(fid);
+            fruitService.delFruit(fid);
 
             //response.sendRedirect("fruit.do");
             return "redirect:fruit.do";
@@ -52,7 +50,7 @@ public class FruitController {
     private String add(String fname, Integer price, Integer fcount, String remark) {
 
         Fruit fruit = new Fruit(0, fname, price, fcount, remark);
-        fruitDAO.addFruit(fruit);
+        fruitService.addFruit(fruit);
 
         return "redirect:fruit.do";
     }
@@ -91,13 +89,11 @@ public class FruitController {
         //重新更新当前页的值
         session.setAttribute("page", page);
 
-        List<Fruit> list = fruitDAO.getFruitPageList(keyword, page);
+        List<Fruit> list = fruitService.getFruitList(keyword, page);
 
         session.setAttribute("fruit_list", list);
-        //总记录条数
-        int fruitCount = fruitDAO.getFruitCount(keyword);
         //总页数
-        int pageCount = (fruitCount - 1) / 5 + 1;
+        int pageCount = fruitService.getPageCount(keyword);
 
         session.setAttribute("pageCount", pageCount);
 
