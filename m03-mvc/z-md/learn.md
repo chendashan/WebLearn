@@ -10,8 +10,27 @@ XML包含三个部分：
 2. DTD 文件类型定义（可以没有）
 3. XML正文
 
-## MVC
+## Servlet
 
-**DispatcherServlet :** 中央控制器
+1. Servlet生命周期的初始化方法：init() , init(config)
 
-Dispatcher `[dɪˈspætʃər]` 调度器;分发器;
+```
+    public void init(ServletConfig config) throws ServletException {
+        this.config = config;
+        this.init();
+    }
+```
+
+因此，如果我们需要在初始化时执行一些自定义的操作，可以出些无参的init()方法  
+可以通过`getConfig()` 获取ServletConfig 对象
+可以通过 `config.getInitParameter()` 获取初始化参数
+
+2. 通过ServletContext获取配置的上下文参数。
+
+## 过滤器Filter
+
+1. Filter也属于Servlet规范
+2. 使用：新建类实现Filter接口，然后实现三个方法 init() 、doFilter() 、 destroy()
+3. 过滤器链，依次执行，采取注解方式时按照全类名先后顺序 
+
+
