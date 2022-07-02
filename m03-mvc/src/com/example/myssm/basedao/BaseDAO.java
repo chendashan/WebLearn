@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDAO<T> {
-    public final String SSL_CONFIG = "?createDatabaseIfNotExist=true&useSSL=false";
-    public final String DRIVER = "com.mysql.jdbc.Driver";
-    public final String URL = "jdbc:mysql://localhost:3306/db1" + SSL_CONFIG;
-    public final String USER = "root";
-    public final String PWD = "1234";
+//    public final String SSL_CONFIG = "?createDatabaseIfNotExist=true&useSSL=false";
+//    public final String DRIVER = "com.mysql.jdbc.Driver";
+//    public final String URL = "jdbc:mysql://localhost:3306/db1" + SSL_CONFIG;
+//    public final String USER = "root";
+//    public final String PWD = "1234";
 
     protected Connection conn;
     protected PreparedStatement psmt;
@@ -35,33 +35,29 @@ public abstract class BaseDAO<T> {
             entityClass = Class.forName(actualType.getTypeName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            throw new DAOException("BaseDAO 构造方法 出错了");
         }
     }
 
     protected Connection getConn() {
-        try {
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, PWD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        return ConnUtil.getConn();
     }
 
     protected void close(ResultSet rs, PreparedStatement psmt, Connection conn) {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (psmt != null) {
-                psmt.close();
-            }
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (psmt != null) {
+//                psmt.close();
+//            }
+//            if (conn != null && !conn.isClosed()) {
+//                conn.close();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void setParams(PreparedStatement psmt, Object... params) throws SQLException {
@@ -94,13 +90,12 @@ public abstract class BaseDAO<T> {
             if (rs.next()) {
                 return ((Long) rs.getLong(1)).intValue();
             }
+            return 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(rs, psmt, conn);
+            throw new DAOException("BaseDAO executeUpdate 出错了");
         }
-        return 0;
     }
 
     //通过反射技术给obj对象的 property 属性赋 propertyValue 值
@@ -114,8 +109,9 @@ public abstract class BaseDAO<T> {
                 field.setAccessible(true);
                 field.set(obj, propertyValue);
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            throw new DAOException("BaseDAO setValue 出错了");
         }
     }
 
@@ -145,14 +141,9 @@ public abstract class BaseDAO<T> {
                 return entity;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } finally {
-            close(rs, psmt, conn);
+            throw new DAOException("BaseDAO load 出错了");
         }
 
         return null;
@@ -185,8 +176,7 @@ public abstract class BaseDAO<T> {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(rs, psmt, conn);
+            throw new DAOException("BaseDAO executeComplexQuery 出错了");
         }
 
         return null;
@@ -219,14 +209,9 @@ public abstract class BaseDAO<T> {
                 list.add(entity);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } finally {
-            close(rs, psmt, conn);
+            throw new DAOException("BaseDAO executeQuery 出错了");
         }
 
         return list;
