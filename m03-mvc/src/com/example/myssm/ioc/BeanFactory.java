@@ -1,4 +1,4 @@
-package com.example.myssm.io;
+package com.example.myssm.ioc;
 
 public interface BeanFactory {
     Object getBean(String id);
