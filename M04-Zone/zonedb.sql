@@ -1,8 +1,6 @@
-CREATE
-DATABASE zonedb1 CHAR SET utf8;
+CREATE DATABASE zonedb1 CHAR SET utf8;
 
-USE
-zonedb1;
+USE zonedb1;
 
 
 /*Table structure for table `t_user_basic` */
@@ -43,10 +41,6 @@ CREATE TABLE `t_user_detail`
 
 /*Data for the table `t_user_detail` */
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
 
 CREATE TABLE `t_friend`
 (
@@ -59,7 +53,6 @@ CREATE TABLE `t_friend`
     CONSTRAINT `FK_friend_basic_fid` FOREIGN KEY (`fid`) REFERENCES `t_user_basic` (`id`),
     CONSTRAINT `FK_friend_basic_uid` FOREIGN KEY (`uid`) REFERENCES `t_user_basic` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
 
 insert into `t_friend`(`id`, `uid`, `fid`)
 values (1, 1, 2),
