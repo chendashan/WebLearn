@@ -19,6 +19,9 @@ XML包含三个部分：
 1. 使用步骤： 添加jar ， 新建ViewBaseServlet(有两个方法） ， 配置两个<context-param> : view-prefix , view-suffix
 2. 部分标签： `<th:if>` , `<th:unless>` , `<th:each>` , `<th:text>`
 
+**注意**  
+使用thymeleaf的页面不能直接被请求，否则thymeleaf无法生效，要通过servlet中执行`processTemplate()`方法，才能渲染生效。
+
 ## Servlet
 
 1. Servlet生命周期的初始化方法：init() , init(config)
