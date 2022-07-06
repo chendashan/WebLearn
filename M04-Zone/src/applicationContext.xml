@@ -34,6 +34,7 @@
     <bean id="replyService" class="com.example.zone.service.impl.ReplyServiceImpl">
         <property name="replyDAO" ref="replyDAO"/>
         <property name="hostReplyService" ref="hostReplyService"/>
+        <property name="userBasicService" ref="userBasicService"/>
     </bean>
 
     <bean id="hostReplyService" class="com.example.zone.service.impl.HostReplyServiceImpl">
