@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
     <script language="JavaScript">
         function showDelImg(imgId) {
             document.getElementById(imgId).style.display = 'inline';
@@ -21,23 +21,25 @@
 </div>
 <div id="div_topic_detail">
     <div id="div_topic_info">
+        <!-- topic自身信息 -->
         <table id="tbl_topic_info">
             <tr>
                 <td rowspan="2" class="w14 h96">
                     <div class="h64 center " style="width:100%;">
-                        <img class="img56 " src="../imgs/qf.png"/>
+                        <img class="img56 " th:src="@{|/imgs/${session.topic.author.headImg}|}"/>
                     </div>
-                    <div class="h32 center" style="width:100%;">乔峰</div>
+                    <div class="h32 center" style="width:100%;" th:text="${session.topic.author.nickName}">乔峰</div>
                 </td>
                 <td class="topic_title" onmousemove="showDelImg('img01')" onmouseout="hiddenDelImg('img01')">
-                    <img id="img01" style="float: right;margin-top:2px;margin-right:2px;display: none;"
-                         src="../imgs/del.jpg" style="width:24px;height: 24px;"/>
-                    <span>《萧某今天就和天下群雄决一死战，你们一起上吧！》</span>
-                    <span class="title_date_right">2021-09-01 12:30:55</span>
+                    <img id="img01"
+                         style="float: right;margin-top:2px;margin-right:2px;display: none;width:24px;height: 24px;"
+                         src="../imgs/del.jpg"/>
+                    <span th:text="${session.topic.title}">《萧某今天就和天下群雄决一死战，你们一起上吧！》</span>
+                    <span class="title_date_right" th:text="${session.topic.topicDate}">2021-09-01 12:30:55</span>
                 </td>
             </tr>
             <tr>
-                <td>杀母大仇, 岂可当作买卖交易？此仇能报便报, 如不能报, 则我父子毕命于此便了。这等肮脏之事, 岂是我萧氏父子所屑为？</td>
+                <td th:text="${session.topic.content}">杀母大仇, 岂可当作买卖交易？此仇能报便报, 如不能报, 则我父子毕命于此便了。这等肮脏之事, 岂是我萧氏父子所屑为？</td>
             </tr>
         </table>
     </div>
@@ -52,8 +54,9 @@
                 </td>
                 <td class="reply_title" onmouseover="showDelImg('img02')" onmouseout="hiddenDelImg('img02')">
                     <span>回复：萧某今天就和天下群雄决一死战，你们一起上吧！</span>
-                    <img id="img02" style="float: right;margin-top:2px;margin-right:2px;display: none;"
-                         src="../imgs/del.jpg" style="width:24px;height: 24px;"/>
+                    <img id="img02"
+                         style="float: right;margin-top:2px;margin-right:2px;display: none;width:24px;height: 24px;"
+                         src="../imgs/del.jpg"/>
                     <span class="title_date_right">2021-09-01 14:35:15</span>
                 </td>
             </tr>

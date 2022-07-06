@@ -15,6 +15,8 @@
 
     <bean id="userBasicDAO" class="com.example.zone.dao.impl.UserBasicDAOImpl"/>
     <bean id="topicDAO" class="com.example.zone.dao.impl.TopicDAOImpl"/>
+    <bean id="replyDAO" class="com.example.zone.dao.impl.ReplyDAOImpl"/>
+    <bean id="hostReplyDAO" class="com.example.zone.dao.impl.HostReplyDAOImpl"/>
 
 
     <bean id="userBasicService" class="com.example.zone.service.impl.UserBasicServiceImpl">
@@ -24,10 +26,26 @@
     <bean id="topicService" class="com.example.zone.service.impl.TopicServiceImpl">
         <!-- property标签用来表示属性：name表示属性名；ref表示引用其他bean的id值 -->
         <property name="topicDAO" ref="topicDAO"/>
+
+        <property name="replyService" ref="replyService"/>
+        <property name="userBasicService" ref="userBasicService"/>
+    </bean>
+
+    <bean id="replyService" class="com.example.zone.service.impl.ReplyServiceImpl">
+        <property name="replyDAO" ref="replyDAO"/>
+        <property name="hostReplyService" ref="hostReplyService"/>
+    </bean>
+
+    <bean id="hostReplyService" class="com.example.zone.service.impl.HostReplyServiceImpl">
+        <property name="hostReplyDAO" ref="hostReplyDAO"/>
     </bean>
 
     <bean id="user" class="com.example.zone.controller.UserController">
         <property name="userBasicService" ref="userBasicService"/>
+        <property name="topicService" ref="topicService"/>
+    </bean>
+
+    <bean id="topic" class="com.example.zone.controller.TopicController">
         <property name="topicService" ref="topicService"/>
     </bean>
 

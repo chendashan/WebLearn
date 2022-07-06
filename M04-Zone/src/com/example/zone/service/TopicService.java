@@ -8,4 +8,7 @@ import java.util.List;
 public interface TopicService {
     //查询特定用户的日志列表
     List<Topic> getTopList(UserBasic userBasic);
+
+    //根据id获取特定topic
+    Topic getTopicById(Integer id);
 }

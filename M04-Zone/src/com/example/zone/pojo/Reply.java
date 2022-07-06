@@ -9,7 +9,13 @@ public class Reply {
     private UserBasic author;
     private Topic topic;
 
+    private HostReply hostReply;
+
     public Reply() {
+    }
+
+    public Reply(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -50,5 +56,13 @@ public class Reply {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public HostReply getHostReply() {
+        return hostReply;
+    }
+
+    public void setHostReply(HostReply hostReply) {
+        this.hostReply = hostReply;
     }
 }
