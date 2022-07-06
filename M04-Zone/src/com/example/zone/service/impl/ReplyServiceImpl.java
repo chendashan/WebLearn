@@ -37,4 +37,18 @@ public class ReplyServiceImpl implements ReplyService {
     public void addReply(Reply reply) {
         replyDAO.addReply(reply);
     }
+
+    @Override
+    public void delReply(Integer replyId) {
+        //1. 根据id获取到reply
+        Reply reply = replyDAO.getReply(replyId);
+
+        HostReply hostReply = hostReplyService.getHostReplyByReplyId(reply.getId());
+        if (hostReply != null) {
+            //2. 如果reply有关联的hostReply，则先删除hostReply
+            hostReplyService.delHostReply(hostReply.getId());
+        }
+        //3. 删除Reply
+        replyDAO.delReply(replyId);
+    }
 }

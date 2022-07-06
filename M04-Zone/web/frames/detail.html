@@ -7,11 +7,23 @@
     <link rel="stylesheet" th:href="@{/css/detail.css}">
     <script language="JavaScript">
         function showDelImg(imgId) {
-            document.getElementById(imgId).style.display = 'inline';
+            var obj = document.getElementById(imgId);
+            if (obj) {
+                obj.style.display = 'inline';
+            }
         }
 
         function hiddenDelImg(imgId) {
-            document.getElementById(imgId).style.display = 'none';
+            var obj = document.getElementById(imgId);
+            if (obj) {
+                obj.style.display = 'none';
+            }
+        }
+
+        function delReply(replyId, topicId) {
+            if (window.confirm("是否确认删除！")) {
+                window.location.href = 'reply.do?operate=delReply&replyId=' + replyId + "&topicId=" + topicId;
+            }
         }
     </script>
 </head>
@@ -52,11 +64,14 @@
                     </div>
                     <div class="h32 center" style="width:100%;" th:text="${reply.author.nickName}">段誉</div>
                 </td>
-                <td class="reply_title" onmouseover="showDelImg('img02')" onmouseout="hiddenDelImg('img02')">
+                <td class="reply_title" th:onmousemove="|showDelImg('img${reply.id}')|"
+                    th:onmouseout="|hiddenDelImg('img${reply.id}')|">
                     <span th:text="|回复：${session.topic.title}" |>回复：萧某今天就和天下群雄决一死战，你们一起上吧！</span>
-                    <img id="img02"
-                         style="float: right;margin-top:2px;margin-right:2px;display: none;width:24px;height: 24px;"
-                         th:src="@{/imgs/del.jpg}"/>
+                    <img th:if="${session.userBasic.id==session.friend.id || session.userBasic.id==reply.author.id}"
+                         th:id="|img${reply.id}|"
+                         th:src="@{/imgs/del.jpg}"
+                         class="delReplyImg"
+                         th:onclick="|delReply(${reply.id}, ${session.topic.id})|"/>
                     <span class="title_date_right" th:text="${reply.replyDate}">2021-09-01 14:35:15</span>
                 </td>
             </tr>
