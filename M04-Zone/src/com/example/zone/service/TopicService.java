@@ -11,4 +11,7 @@ public interface TopicService {
 
     //根据id获取特定topic
     Topic getTopicById(Integer id);
+
+    //删除特定的topic
+    void delTopic(Integer topicId);
 }

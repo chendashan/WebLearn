@@ -51,4 +51,14 @@ public class ReplyServiceImpl implements ReplyService {
         //3. 删除Reply
         replyDAO.delReply(replyId);
     }
+
+    @Override
+    public void delReplyList(Topic topic) {
+        List<Reply> replyList = replyDAO.getReplyList(topic);
+        if (replyList != null) {
+            for (Reply reply : replyList) {
+                delReply(reply.getId());
+            }
+        }
+    }
 }
