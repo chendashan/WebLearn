@@ -104,15 +104,17 @@
 </div>
 <div id="div_add_reply">
     <p class="add_reply_title">添加回复</p>
-    <form action="" method="post">
+    <form action="reply.do" method="post">
+        <input type="hidden" name="operate" value="addReply">
+        <input type="hidden" name="topicId" th:value="${session.topic.id}">
         <table>
             <tr>
                 <th style="width: 25%">回复日志：</th>
-                <td><input type="text" value="《萧某今天就和天下群雄决一死战，你们一起上吧！》" readonly/></td>
+                <td><input type="text" th:value="${session.topic.title}" readonly/></td>
             </tr>
             <tr>
                 <th>回复内容：</th>
-                <td><textarea rows="3"></textarea></td>
+                <td><textarea name="content" rows="3"></textarea></td>
             </tr>
             <tr>
                 <th colspan="2">

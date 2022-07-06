@@ -23,7 +23,7 @@ public class ReplyServiceImpl implements ReplyService {
         List<Reply> replyList = replyDAO.getReplyList(new Topic(topicId));
         for (Reply reply : replyList) {
             //将回复的用户信息设置进去
-            UserBasic author = userBasicService.getUserBasicById(reply.getId());
+            UserBasic author = userBasicService.getUserBasicById(reply.getAuthor().getId());
             reply.setAuthor(author);
 
             //将关联的HostReply设置进去
@@ -31,5 +31,10 @@ public class ReplyServiceImpl implements ReplyService {
             reply.setHostReply(hostReply);
         }
         return replyList;
+    }
+
+    @Override
+    public void addReply(Reply reply) {
+        replyDAO.addReply(reply);
     }
 }
