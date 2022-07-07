@@ -9,6 +9,7 @@ CREATE TABLE `t_book` (
   `author` varchar(20) DEFAULT NULL,
   `saleCount` int(11) DEFAULT NULL,
   `bookCount` int(11) DEFAULT NULL,
+  `bookStatus` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
