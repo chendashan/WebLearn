@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDAO<T> {
-//    public final String SSL_CONFIG = "?createDatabaseIfNotExist=true&useSSL=false";
-//    public final String DRIVER = "com.mysql.jdbc.Driver";
-//    public final String URL = "jdbc:mysql://localhost:3306/db1" + SSL_CONFIG;
-//    public final String USER = "root";
-//    public final String PWD = "1234";
 
     protected Connection conn;
     protected PreparedStatement psmt;
@@ -131,7 +126,8 @@ public abstract class BaseDAO<T> {
         return "java.lang.Integer".equals(typeName)
                 || "java.lang.String".equals(typeName)
                 || "java.util.Date".equals(typeName)
-                || "java.sql.Date".equals(typeName);
+                || "java.sql.Date".equals(typeName)
+                || "java.lang.Double".equals(typeName);
     }
 
     private static boolean isMyType(String typeName) {
