@@ -15,7 +15,7 @@ CREATE TABLE `t_book` (
 
 /*Data for the table `t_book` */
 
-insert  into `t_book`(`id`,`bookImg`,`bookName`,`price`,`author`,`saleCount`,`bookCount`) values (1,'cyuyanrumenjingdian.jpg','C语言入门经典',99.00,'亚历山大',8,197),(2,'santi.jpg','三体',48.95,'周杰伦',18,892),(3,'ailuntulingzhuan.jpg','艾伦图灵传',50.00,'刘若英',12,143),(4,'bainiangudu.jpg','百年孤独',40.00,'王力宏',3,98),(5,'biancheng.jpg','边城',30.00,'刘德华',2,99),(6,'jieyouzahuodian.jpg','解忧杂货店',27.00,'东野圭吾',5,100),(7,'zhongguozhexueshi.jpg','中国哲学史',45.00,'冯友兰',3,100),(8,'huranqiri.jpg','忽然七日',19.00,'劳伦',50,200),(9,'sudongpozhuan.jpg','苏东坡传',20.00,'林语堂',50,300),(10,'fusang.jpg','扶桑',20.00,'严歌岑',10,89),(11,'geihaizideshi.jpg','给孩子的诗',23.00,'北岛',5,99);
+insert  into `t_book`(`id`,`bookImg`,`bookName`,`price`,`author`,`saleCount`,`bookCount`) values (1,'kanjian.jpg','看见',23.00,'柴静',5,99),(2,'santi.jpg','三体',48.95,'刘慈欣',18,892),(3,'ailuntulingzhuan.jpg','艾伦图灵传',50.00,'安德鲁·霍奇斯',12,143),(4,'bainiangudu.jpg','百年孤独',40.00,'马尔克斯',3,98),(5,'biancheng.jpg','边城',30.00,'沈从文',2,99),(6,'cyuyanrumenjingdian.jpg','C语言入门经典',99.00,'Ivor Horton',8,197),(7,'zhongguozhexueshi.jpg','中国哲学史',45.00,'冯友兰',3,100),(8,'huranqiri.jpg','忽然七日',19.00,'劳伦',50,200),(9,'sudongpozhuan.jpg','苏东坡传',20.00,'林语堂',50,300),(10,'jieyouzahuodian.jpg','解忧杂货店',27.00,'东野圭吾',5,100),(11,'fusang.jpg','扶桑',20.00,'严歌岑',10,89);
 
 
 CREATE TABLE `t_user` (
