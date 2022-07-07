@@ -11,6 +11,12 @@ public class Book {
     private Integer bookCount;  //库存
     private Integer bookStatus = 0;  //0:正常    1:无效
 
+    public Book() {
+    }
+
+    public Book(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

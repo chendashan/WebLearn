@@ -3,8 +3,17 @@ package com.example.bookstore.pojo;
 public class CartItem {
     private Integer id;
     private Book book;
-    private Integer buyCont;
+    private Integer buyCount;
     private User userBean;
+
+    public CartItem() {
+    }
+
+    public CartItem(Book book, Integer buyCount, User userBean) {
+        this.book = book;
+        this.buyCount = buyCount;
+        this.userBean = userBean;
+    }
 
     public Integer getId() {
         return id;
@@ -22,12 +31,12 @@ public class CartItem {
         this.book = book;
     }
 
-    public Integer getBuyCont() {
-        return buyCont;
+    public Integer getBuyCount() {
+        return buyCount;
     }
 
-    public void setBuyCont(Integer buyCont) {
-        this.buyCont = buyCont;
+    public void setBuyCount(Integer buyCount) {
+        this.buyCount = buyCount;
     }
 
     public User getUserBean() {

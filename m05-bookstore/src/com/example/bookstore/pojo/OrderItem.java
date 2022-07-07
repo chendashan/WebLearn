@@ -6,6 +6,9 @@ public class OrderItem {
     private Integer buyCount;
     private OrderBean orderBean;
 
+    public OrderItem() {
+    }
+
     public Integer getId() {
         return id;
     }

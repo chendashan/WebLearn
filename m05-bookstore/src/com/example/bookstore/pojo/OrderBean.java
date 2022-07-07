@@ -13,6 +13,8 @@ public class OrderBean {
 
     private List<OrderItem> orderItemList;
 
+    public OrderBean() {
+    }
 
     public Integer getId() {
         return id;
