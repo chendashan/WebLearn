@@ -42,4 +42,9 @@ public class TopicServiceImpl implements TopicService {
             topicDAO.delTopic(topic);
         }
     }
+
+    @Override
+    public void addTopic(Topic topic) {
+        topicDAO.addTopic(topic);
+    }
 }

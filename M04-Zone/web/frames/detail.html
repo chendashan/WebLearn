@@ -89,7 +89,8 @@
                             主人回复于2021/10/01 11:50:30
                         </li>
                     </ul>
-                    <a th:id="|a${reply.id}|" th:unless="${reply.hostReply!=null}" href="#"
+                    <a th:id="|a${reply.id}|"
+                       th:unless="${reply.hostReply!=null || session.userBasic.id!=session.friend.id}" href="#"
                        style="float: right;display: none;">主人回复</a>
                 </td>
             </tr>

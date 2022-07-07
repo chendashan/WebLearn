@@ -7,6 +7,7 @@ import com.example.zone.service.ReplyService;
 import com.example.zone.service.TopicService;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 public class TopicController {
@@ -33,6 +34,13 @@ public class TopicController {
         userBasic.setTopicList(topicList);
         session.setAttribute("friend", userBasic);
         return "frames/main";
+    }
+
+    public String addTopic(String title, String content, HttpSession session) {
+        UserBasic userBasic = (UserBasic) session.getAttribute("userBasic");
+        Topic topic = new Topic(title, content, new Date(), userBasic);
+        topicService.addTopic(topic);
+        return "redirect:topic.do?operate=getTopicList";
     }
 
 }
