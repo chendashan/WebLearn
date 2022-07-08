@@ -22,4 +22,9 @@ public class CartItemDAOImpl extends BaseDAO<CartItem> implements CartItemDAO {
     public List<CartItem> getCartItemList(User user) {
         return executeQuery("select * from t_cart_item where userBean = ?", user.getId());
     }
+
+    @Override
+    public void delCartItem(Integer id) {
+        super.executeUpdate("delete from t_cart_item where id = ?", id);
+    }
 }

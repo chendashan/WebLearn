@@ -1,9 +1,11 @@
 package com.example.bookstore.service.impl;
 
 import com.example.bookstore.dao.CartItemDAO;
+import com.example.bookstore.pojo.Book;
 import com.example.bookstore.pojo.Cart;
 import com.example.bookstore.pojo.CartItem;
 import com.example.bookstore.pojo.User;
+import com.example.bookstore.service.BookService;
 import com.example.bookstore.service.CartItemService;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 public class CartItemServiceImpl implements CartItemService {
     private CartItemDAO cartItemDAO;
+    private BookService bookService;
 
     @Override
     public void addCartItem(CartItem cartItem) {
@@ -43,9 +46,18 @@ public class CartItemServiceImpl implements CartItemService {
         }
     }
 
+    private List<CartItem> getCartItemList(User user) {
+        List<CartItem> cartItemList = cartItemDAO.getCartItemList(user);
+        for (CartItem cartItem : cartItemList) {
+            Book book = bookService.getBookById(cartItem.getBook().getId());
+            cartItem.setBook(book);
+        }
+        return cartItemList;
+    }
+
     @Override
     public Cart getCart(User user) {
-        List<CartItem> cartItemList = cartItemDAO.getCartItemList(user);
+        List<CartItem> cartItemList = getCartItemList(user);
         Map<Integer, CartItem> map = new HashMap<>();
 
         if (cartItemList != null) {
@@ -56,5 +68,10 @@ public class CartItemServiceImpl implements CartItemService {
         Cart cart = new Cart();
         cart.setCartItemMap(map);
         return cart;
+    }
+
+    @Override
+    public void delCartItem(Integer cartItemId) {
+        cartItemDAO.delCartItem(cartItemId);
     }
 }

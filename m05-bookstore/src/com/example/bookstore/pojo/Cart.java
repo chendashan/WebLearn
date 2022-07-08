@@ -11,6 +11,8 @@ public class Cart {
     private Double totalMoney;    //购物车总金额
     private Integer totalCount;    //购物项的数量
 
+    private Integer totalBookCount;  //书本的个数
+
     public Map<Integer, CartItem> getCartItemMap() {
         return cartItemMap;
     }
@@ -45,5 +47,15 @@ public class Cart {
 
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public Integer getTotalBookCount() {
+        totalBookCount = 0;
+        if (cartItemMap != null && cartItemMap.size() > 0) {
+            for (CartItem cartItem : cartItemMap.values()) {
+                totalBookCount = totalBookCount + cartItem.getBuyCount();
+            }
+        }
+        return totalBookCount;
     }
 }

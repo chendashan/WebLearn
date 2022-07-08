@@ -13,4 +13,6 @@ public interface CartItemService {
 
     //加载指定用户的购物车信息
     Cart getCart(User user);
+
+    void delCartItem(Integer cartItemId);
 }
