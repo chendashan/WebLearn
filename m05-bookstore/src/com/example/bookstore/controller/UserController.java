@@ -23,4 +23,9 @@ public class UserController {
         }
         return "user/login";
     }
+
+    public String logout(HttpSession session) {
+        session.setAttribute("currentUser", null);
+        return "user/login";
+    }
 }
