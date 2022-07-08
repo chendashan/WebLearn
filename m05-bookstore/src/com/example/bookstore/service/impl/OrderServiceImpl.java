@@ -38,4 +38,14 @@ public class OrderServiceImpl implements OrderService {
             cartItemService.delCartItem(cartItem.getId());
         }
     }
+
+    @Override
+    public List<OrderBean> getOrderList(User user) {
+        List<OrderBean> orderBeanList = orderDAO.getOrderList(user);
+        for (OrderBean orderBean : orderBeanList) {
+            int count = orderDAO.getOrderTotalBookCount(orderBean);
+            orderBean.setTotalBookCount(count);
+        }
+        return orderBeanList;
+    }
 }

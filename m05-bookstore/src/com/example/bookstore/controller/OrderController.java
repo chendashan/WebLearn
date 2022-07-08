@@ -8,12 +8,14 @@ import com.example.myssm.util.StringUtil;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class OrderController {
 
     private OrderService orderService;
 
+    //结账
     public String checkout(HttpSession session) {
         OrderBean orderBean = new OrderBean();
         Date date = new Date();
@@ -30,5 +32,15 @@ public class OrderController {
         orderService.addOrderBean(orderBean);
 
         return "index";
+    }
+
+    //查看订单列表
+    public String getOrderList(HttpSession session) {
+        User user = (User) session.getAttribute("currentUser");
+
+        List<OrderBean> orderList = orderService.getOrderList(user);
+        session.setAttribute("orderList", orderList);
+
+        return "order/order";
     }
 }
