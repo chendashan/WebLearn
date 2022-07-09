@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+
+/*
 @WebFilter(urlPatterns = {"*.do", "*.html"},
         initParams = {
                 //白名单
@@ -17,6 +19,8 @@ import java.util.List;
                         value = "/m05/page.do?operate=page," +
                                 "/m05/user.do")
         })
+*/
+
 public class SessionFilter implements Filter {
 
     List<String> whiteList = null;

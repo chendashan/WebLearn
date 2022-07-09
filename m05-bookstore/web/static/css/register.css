@@ -61,7 +61,7 @@
 }
 
 .login_banner .register_form form .form-item:nth-last-child(2) .verify input {
-    width: 146px;
+    width: 100px;
 }
 
 .login_banner .register_form form .btn {
