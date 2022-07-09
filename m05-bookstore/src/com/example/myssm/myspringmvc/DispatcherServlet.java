@@ -1,6 +1,7 @@
 package com.example.myssm.myspringmvc;
 
 import com.example.myssm.ioc.BeanFactory;
+import com.example.myssm.util.Constants;
 import com.example.myssm.util.StringUtil;
 
 import javax.servlet.ServletContext;
@@ -92,6 +93,10 @@ public class DispatcherServlet extends ViewBaseServlet {
 
                     //3. 视图处理
                     String strReturn = (String) returnObj;
+                    if (Constants.RETURN_SCRIPT.equals(strReturn)) {
+                        //执行js什么都不做直接返回
+                        return;
+                    }
                     if (strReturn.startsWith("redirect:")) {
                         String redirectStr = strReturn.substring("redirect:".length());
                         response.sendRedirect(redirectStr);

@@ -20,7 +20,7 @@
         <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
         <init-param>
             <param-name>kaptcha.image.width</param-name>
-            <param-value>120</param-value>
+            <param-value>140</param-value>
         </init-param>
         <init-param>
             <param-name>kaptcha.image.height</param-name>
