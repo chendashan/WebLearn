@@ -46,8 +46,8 @@ console.log('flag1=' + flag1 + ', flag2=' + flag2);
 输出：
 
 ```
-hell_ w_rld L_L
-flag1=false, flag2=true
+    hell_ w_rld L_L
+    flag1=false, flag2=true
 ```
 
 #### 元字符
@@ -69,9 +69,9 @@ console.log(str2);
 输出：
 
 ```
-AAA>AAAA|A
-A?A
-AhelloA AworldA A123A >AabcA AabcA*
+    AAA>AAAA|A
+    A?A
+    AhelloA AworldA A123A >AabcA AabcA*
 ```
 
 常用元字符：
@@ -108,9 +108,9 @@ console.log(str.replace(reg3, "A"));
 输出：
 
 ```
-AAdefg>?129
-acAAAAAAAAA
-AAAAfg>?AAA
+    AAdefg>?129
+    acAAAAAAAAA
+    AAAAfg>?AAA
 ```
 
 #### 出现次数
