@@ -27,6 +27,22 @@
                                 console.log(value)
                             })
                             .catch(function (reason){});
+                    },
+                    axios02:function () {
+                        axios({
+                            method:"POST",
+                            url:"axios02.do",
+                            data:{
+                                uname:vue.uname,
+                                pwd:vue.pwd
+                            }
+                        })
+                            .then(function (value){
+                                var data = value.data;
+                                console.log(data);
+                                console.log(data.uname)
+                            })
+                            .catch(function (reason){});
                     }
                 }
             });
@@ -40,6 +56,7 @@
         uname:<input type="text" v-model="uname"/><br/>
         pwd:<input type="text" v-model="pwd"/><br/>
         <input type="button" value="发送异步请求" @click="axios01"/>
+        <input type="button" value="发送json异步请求" @click="axios02"/>
     </div>
 </body>
 </html>
