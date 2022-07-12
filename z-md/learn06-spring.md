@@ -11,7 +11,3 @@
 **DI ( Dependency Injection ) 依赖注入**  
 在容器中建立bean与bean之间的依赖关系的整个过程，称为依赖注入
 
-## Maven
-
-**坐标：** Maven中的坐标用于描述仓库中资源的位置。  
-例如 `https://repo1.maven.org/maven2/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar`
