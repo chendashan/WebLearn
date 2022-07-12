@@ -23,7 +23,7 @@
             <div class="topbar-right" th:if="${session.currentUser==null}">
                 <a href="user/login.html" class="login">登录</a>
                 <a href="user/regist.html" class="register">注册</a>
-                <a th:href="@{cart.do}" class="cart iconfont icon-gouwuche">
+                <a th:href="@{page.do?operate=page&page=cart/cart}" class="cart iconfont icon-gouwuche">
                     购物车
                     <div class="cart-num">3</div>
                 </a>
@@ -33,7 +33,7 @@
                 <!--登录后风格-->
                 <span>欢迎您 <b th:text="${session.currentUser.uname}">张总</b></span>
                 <a th:href="@{user.do?operate=logout}" class="register">注销</a>
-                <a th:href="@{cart.do}" class="cart iconfont icon-gouwuche">
+                <a th:href="@{page.do?operate=page&page=cart/cart}" class="cart iconfont icon-gouwuche">
                     购物车
                     <div class="cart-num" th:text="${session.currentUser.cart.totalCount}">3</div>
                 </a>

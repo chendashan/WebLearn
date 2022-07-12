@@ -51,6 +51,8 @@ public class CartItemServiceImpl implements CartItemService {
         for (CartItem cartItem : cartItemList) {
             Book book = bookService.getBookById(cartItem.getBook().getId());
             cartItem.setBook(book);
+            //get方法里给totalMoney赋值
+            cartItem.getTotalMoney();
         }
         return cartItemList;
     }
@@ -67,6 +69,8 @@ public class CartItemServiceImpl implements CartItemService {
         }
         Cart cart = new Cart();
         cart.setCartItemMap(map);
+        cart.getTotalBookCount();
+        cart.getTotalMoney();
         return cart;
     }
 
