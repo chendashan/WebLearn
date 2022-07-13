@@ -3,38 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="script/vue.js"></script>
-    <script src="script/axios.min.js"></script>
+    <script th:src="@{/static/script/vue.js}"></script>
+    <script th:src="@{/static/script/axios.min.js}"></script>
+    <base th:href="@{/}"/>
+
     <script>
-        window.onload=function () {
+        window.onload = function () {
             var vue = new Vue({
-                "el":"#div0",
-                data:{
-                    uname:"tom",
-                    pwd:"123"
+                "el": "#div0",
+                data: {
+                    uname: "tom",
+                    pwd: "123"
                 },
-                methods:{
+                methods: {
                     axios01:function () {
                         axios({
-                            method:"POST",
-                            url:"axios01.do",
-                            params:{
-                                uname:vue.uname,
-                                pwd:vue.pwd
+                            method: "POST",
+                            url: "cart.do",
+                            params: {
+                                operate: "test",
+                                uname: vue.uname,
+                                pwd: vue.pwd
                             }
                         })
                             .then(function (value){
-                                console.log(value)
+                                console.log(value.data)
                             })
                             .catch(function (reason){});
                     },
                     axios02:function () {
                         axios({
-                            method:"POST",
-                            url:"axios02.do",
-                            data:{
-                                uname:vue.uname,
-                                pwd:vue.pwd
+                            method: "POST",
+                            url: "cart.do?operate=test2",
+                            data: {
+                                uname: vue.uname,
+                                pwd: vue.pwd
                             }
                         })
                             .then(function (value){
