@@ -11,3 +11,11 @@
 **DI ( Dependency Injection ) 依赖注入**  
 在容器中建立bean与bean之间的依赖关系的整个过程，称为依赖注入
 
+## AOP
+
+AOP ( Aspect Oriented Programming ) 面向切面编程，一种编程范式，指导开发者如何组织程序结构。
+
+作用：在不惊动原始设计的基础上为其进行功能增强。
+
+Spring理念：无侵入式
+
