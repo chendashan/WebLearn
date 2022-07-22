@@ -2,8 +2,8 @@ package com.example.controller;
 
 public class Result {
 
-    private Integer code;
     private Object data;
+    private Integer code;
     private String msg;
 
     public Result(Integer code, Object data) {
