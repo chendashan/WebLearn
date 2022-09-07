@@ -60,3 +60,52 @@ equals : 比较的是两个对象的内容是否相等，需要重写这个方�
 - 被final修饰的方法不可以被重写
 - 被final修饰的变量不可变，引用类型时引用不可变，指向的内容可变
 - final和static往往搭配使用效率更高，常量使用不会导致类加载
+
+### 8. 泛型常用特点
+
+泛型是Java SE 1.5之后的特性，《Java 核心技术》中对泛型的定义是：
+
+“泛型”意味着编写的代码可以被不同类型的对象所重用。
+
+### 9. Java创建对象有几种方式？
+
+四种：
+
+1. new 创建新对象
+2. 通过反射机制
+3. 采用clone机制
+4. 通过序列化机制
+
+### 10. try catch finally，try里有return，finally还执行么？
+
+执行，并且finally的执行早于try里面的return。
+
+会先把要返回的值进行保存起来，finally中的代码不会改变返回的值。
+
+finally中最好不要包含return，否则程序会提前退出，返回值不是try中保存的返回值。
+
+### 11. 什么是异常？
+
+java中出现的异常情况有两种 Error(错误) 和 Exception(异常) ，它们的父类是Throwable(可抛出)。
+
+Exception又分为两种，RuntimeException(运行时异常) 和 CheckedException(被检查异常)
+
+#### Throwable
+
+- Error
+    - 程序无法处理的错误，与代码的编写无关，是运行时JVM出现的问题。
+    - 例如 OutOfMemoryError 和 StackOverflowError
+- Exception
+    - CheckedException (被检查异常)
+        - Java编译器会检查到的异常
+        - IOException
+        - SQLException
+        - NumberFormatException
+    - RuntimeException (运行时异常)
+        - 编译器检查不到，运行时发生的异常
+        - NullPointerException 空指针异常
+        - IndexOutOfBoundsException 数组越界异常
+        - ClassCastException 类型转换异常
+        - IllegalArgumentException 非法参数异常
+    
+
